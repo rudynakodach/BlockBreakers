@@ -14,6 +14,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 import rudynakodach.github.io.blockbreakers.Breakers.Breaker;
+import rudynakodach.github.io.blockbreakers.Breakers.BreakerLevels;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,13 +40,11 @@ public class BlockBreakerListener implements Listener {
             PersistentDataContainer dataContainer = meta.getPersistentDataContainer();
 
             Block target = event.getBlock().getRelative(BlockFace.DOWN);
+            BreakerLevels levels = new BreakerLevels(plugin.getConfig());
 
-            if(meta.getCustomModelData() == 1) {
-                new BreakerAction(plugin, logger, new Breaker(5,1,16,new ItemStack(Material.WOODEN_PICKAXE, 1)), event.getBlock(), target.getLocation());
-            }
-            else if(meta.getCustomModelData() == 2) {
-                new BreakerAction(plugin, logger, new Breaker(4, 2, 32, new ItemStack(Material.STONE_PICKAXE, 1)), event.getBlock(), target.getLocation());
-            }
+            int tier = meta.getCustomModelData();
+
+            new BreakerAction(plugin,logger, new Breaker(levels.delayMap.get(tier),tier, levels.durabilityMap.get(tier), new ItemStack(levels.breakerItemHashMap.get(tier).getType(), 1)), event.getBlock(), target.getLocation());
         }
     }
 }

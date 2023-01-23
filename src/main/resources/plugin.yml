@@ -2,7 +2,7 @@ name: BlockBreakers
 version: '${project.version}'
 main: rudynakodach.github.io.blockbreakers.BlockBreakers
 api-version: 1.19
-commands:
+tier:
   giveBreaker:
     description: Receive a block breaker of specified tier
     usage: /givebreaker <tier>

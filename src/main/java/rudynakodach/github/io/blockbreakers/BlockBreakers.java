@@ -12,12 +12,15 @@ public final class BlockBreakers extends JavaPlugin {
 
         getLogger().log(Level.INFO, "Hello, World!");
 
+        saveDefaultConfig();
+        getLogger().log(Level.INFO, "Config ready.");
+
         getServer().getPluginManager().registerEvents(new BlockBreakerListener(this, getLogger()), this);
         getLogger().log(Level.INFO, "Events registered.");
 
-        Commands cmds = new Commands(getLogger(), this);
+        Commands commands = new Commands(getLogger(), this);
 
-        getCommand("givebreaker").setExecutor(cmds);
+        getCommand("givebreaker").setExecutor(commands);
         getLogger().log(Level.INFO, "Commands registered.");
 
     }
