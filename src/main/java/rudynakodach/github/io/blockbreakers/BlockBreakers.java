@@ -1,8 +1,9 @@
 package rudynakodach.github.io.blockbreakers;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import rudynakodach.github.io.blockbreakers.Commands.GiveAreaBreaker;
+import rudynakodach.github.io.blockbreakers.Commands.GiveBreaker;
 
-import java.util.Objects;
 import java.util.logging.Level;
 
 public final class BlockBreakers extends JavaPlugin {
@@ -18,9 +19,11 @@ public final class BlockBreakers extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BlockBreakerListener(this, getLogger()), this);
         getLogger().log(Level.INFO, "Events registered.");
 
-        Commands commands = new Commands(getLogger(), this);
+        GiveBreaker breakerCommand = new GiveBreaker(getLogger(), this);
+        getCommand("givebreaker").setExecutor(breakerCommand);
 
-        getCommand("givebreaker").setExecutor(commands);
+        GiveAreaBreaker areaBreakerCommand = new GiveAreaBreaker(this, getLogger(), getConfig());
+        getCommand("giveareabreaker").setExecutor(areaBreakerCommand);
         getLogger().log(Level.INFO, "Commands registered.");
 
     }

@@ -1,17 +1,10 @@
-package rudynakodach.github.io.blockbreakers;
+package rudynakodach.github.io.blockbreakers.StandardBreakers;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.block.Dispenser;
-import rudynakodach.github.io.blockbreakers.Breakers.BreakTask;
-import rudynakodach.github.io.blockbreakers.Breakers.Breaker;
+import rudynakodach.github.io.blockbreakers.StandardBreakers.BreakTask;
+import rudynakodach.github.io.blockbreakers.StandardBreakers.Breaker;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

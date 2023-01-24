@@ -5,18 +5,17 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 
 import org.bukkit.block.Block;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
-import rudynakodach.github.io.blockbreakers.Breakers.Breaker;
-import rudynakodach.github.io.blockbreakers.Breakers.BreakerLevels;
+import rudynakodach.github.io.blockbreakers.AreaBreakers.AreaBreaker;
+import rudynakodach.github.io.blockbreakers.AreaBreakers.AreaBreakerAction;
+import rudynakodach.github.io.blockbreakers.StandardBreakers.Breaker;
+import rudynakodach.github.io.blockbreakers.StandardBreakers.BreakerAction;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class BlockBreakerListener implements Listener {
@@ -33,18 +32,30 @@ public class BlockBreakerListener implements Listener {
     public void onBlockPlaced(BlockPlaceEvent event) {
 
         ItemStack item = event.getItemInHand();
+        ItemMeta meta = item.getItemMeta();
+        PersistentDataContainer dataContainer = meta.getPersistentDataContainer();
+
+        BreakerLevels levels = new BreakerLevels(plugin.getConfig());
 
         if(item.getType() == Material.DISPENSER) {
 
-            ItemMeta meta = item.getItemMeta();
-            PersistentDataContainer dataContainer = meta.getPersistentDataContainer();
+            if(dataContainer.has(BreakerNamespaceKeys.blockBreakerTag)) {
 
-            Block target = event.getBlock().getRelative(BlockFace.DOWN);
-            BreakerLevels levels = new BreakerLevels(plugin.getConfig());
+                Block target = event.getBlock().getRelative(BlockFace.DOWN);
 
-            int tier = meta.getCustomModelData();
+                int tier = meta.getCustomModelData();
 
-            new BreakerAction(plugin,logger, new Breaker(levels.delayMap.get(tier),tier, levels.durabilityMap.get(tier), new ItemStack(levels.breakerItemHashMap.get(tier).getType(), 1)), event.getBlock(), target.getLocation());
+                new BreakerAction(plugin,logger, new Breaker(levels.delayMap.get(tier),tier, levels.durabilityMap.get(tier), new ItemStack(levels.breakerItemHashMap.get(tier).getType(), 1)), event.getBlock(), target.getLocation());
+            }
+        }
+        else if(item.getType() == Material.OBSERVER) {
+            if(dataContainer.has(BreakerNamespaceKeys.areaBreakerTag)) {
+
+                Block target = event.getBlock().getRelative(BlockFace.DOWN);
+                int tier = meta.getCustomModelData();
+
+                new AreaBreakerAction(plugin, logger, new AreaBreaker(levels.areaBreakerDelayMap.get(tier),tier, levels.areaBreakerDurabilityMap.get(tier), new ItemStack(levels.areaBreakerItemHashMap.get(tier).getType(), 1)),event.getBlock(),target.getLocation(), event.getBlock().getWorld());
+            }
         }
     }
 }

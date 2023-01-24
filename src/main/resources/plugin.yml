@@ -2,8 +2,15 @@ name: BlockBreakers
 version: '${project.version}'
 main: rudynakodach.github.io.blockbreakers.BlockBreakers
 api-version: 1.19
-tier:
+
+commands:
+
   giveBreaker:
     description: Receive a block breaker of specified tier
     usage: /givebreaker <tier>
     permission: blockbreakers.breaker.give
+
+  giveAreaBreaker:
+    desription: Receive an area breaker of specified tier
+    usage: /giveareabreaker <tier>
+    permission: blockbreakers.areabreaker.give

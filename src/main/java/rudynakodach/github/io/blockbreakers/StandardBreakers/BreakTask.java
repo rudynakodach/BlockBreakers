@@ -1,4 +1,4 @@
-package rudynakodach.github.io.blockbreakers.Breakers;
+package rudynakodach.github.io.blockbreakers.StandardBreakers;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -25,7 +25,7 @@ public class BreakTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        if (i > durability) {
+        if (i >= durability) {
             blockBreaker.breakNaturally(new ItemStack(Material.AIR));
             this.cancel();
             return;

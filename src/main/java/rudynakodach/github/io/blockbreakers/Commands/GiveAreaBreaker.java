@@ -1,21 +1,21 @@
-package rudynakodach.github.io.blockbreakers;
+package rudynakodach.github.io.blockbreakers.Commands;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
-import rudynakodach.github.io.blockbreakers.Breakers.Breaker;
-import rudynakodach.github.io.blockbreakers.Breakers.BreakerLevels;
+import rudynakodach.github.io.blockbreakers.AreaBreakers.AreaBreaker;
+import rudynakodach.github.io.blockbreakers.BreakerLevels;
 
-import java.util.logging.Logger;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
-public class Commands implements CommandExecutor {
+public class GiveAreaBreaker implements CommandExecutor {
 
     HashMap<Integer, Integer> delayMap;
     HashMap<Integer, Integer> durabilityMap;
@@ -23,23 +23,22 @@ public class Commands implements CommandExecutor {
 
     Logger logger;
     JavaPlugin plugin;
+    FileConfiguration config;
 
-    public Commands(Logger _logger, JavaPlugin _plugin) {
+    public GiveAreaBreaker(JavaPlugin _plugin, Logger _logger, FileConfiguration _config) {
         logger = _logger;
         plugin = _plugin;
+        config = _config;
 
-        BreakerLevels breakerLevels = new BreakerLevels(plugin.getConfig());
-
-        delayMap = breakerLevels.delayMap;
-        durabilityMap = breakerLevels.durabilityMap;
-        itemMap = breakerLevels.breakerItemHashMap;
+        BreakerLevels levels = new BreakerLevels(config);
+        delayMap = levels.areaBreakerDelayMap;
+        durabilityMap = levels.areaBreakerDurabilityMap;
+        itemMap = levels.areaBreakerItemHashMap;
     }
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-
-        if(command.getName().equalsIgnoreCase("givebreaker")) {
-
+        if(command.getName().equalsIgnoreCase("giveareabreaker")) {
             if(args.length == 1) {
                 int tier = Integer.parseInt(args[0]);
                 int durability = durabilityMap.get(tier);
@@ -48,14 +47,15 @@ public class Commands implements CommandExecutor {
 
                 Player player = (Player) sender;
 
-                player.getInventory().addItem(new Breaker(delay, tier,durability, item).createBlockBreaker());
+                player.getInventory().addItem(new AreaBreaker(delay, tier,durability, item).createAreaBreakerItem());
 
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&',"&fReceived &aBlock&eBreaker&7MK" + tier));
-
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&',"&fReceived &cArea&eBreaker &7MK" + tier));
                 return true;
             }
         }
 
         return false;
     }
+
+
 }

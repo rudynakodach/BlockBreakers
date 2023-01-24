@@ -1,41 +1,39 @@
-package rudynakodach.github.io.blockbreakers.Breakers;
+package rudynakodach.github.io.blockbreakers.AreaBreakers;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.NamespacedKey;
-
 import org.bukkit.Material;
-import org.bukkit.block.Block;
+import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import rudynakodach.github.io.blockbreakers.BreakerNamespaceKeys;
 
-public class Breaker {
+public class AreaBreaker {
 
     public int delay;
     public int durability;
     public ItemStack BLOCK_BREAKER_POWER;
     int tier;
 
-    public Material BLOCK_BREAKER_MATERIAL = Material.DISPENSER;
-    public String BLOCK_BREAKER_TAG = "is_block_breaker";
-    public NamespacedKey BLOCK_BREAKER_KEY = new NamespacedKey("block_breakers", BLOCK_BREAKER_TAG);
+    public Material BLOCK_BREAKER_MATERIAL = Material.OBSERVER;
+    public String BLOCK_BREAKER_TAG = "is_area_breaker";
+    public NamespacedKey BLOCK_BREAKER_KEY = BreakerNamespaceKeys.areaBreakerTag;
 
 
-    public Breaker(int _delay, int _tier, int _durability, ItemStack _material) {
+    public AreaBreaker(int _delay, int _tier, int _durability, ItemStack _item) {
         delay = _delay;
         tier = _tier;
         durability = _durability;
-        BLOCK_BREAKER_POWER = _material;
+        BLOCK_BREAKER_POWER = _item;
     }
 
-    public ItemStack createBlockBreaker() {
+    public ItemStack createAreaBreakerItem() {
 
         ItemStack blockBreaker = new ItemStack(BLOCK_BREAKER_MATERIAL);
         ItemMeta meta = blockBreaker.getItemMeta();
 
-        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',"&fBlock&eBreaker &7MK" + tier));
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',"&aArea&eBreaker &7MK" + tier));
         meta.setCustomModelData(tier);
 
         PersistentDataContainer data = meta.getPersistentDataContainer();

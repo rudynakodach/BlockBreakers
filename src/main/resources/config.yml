@@ -1,27 +1,49 @@
 
 breakers:
+    block:
+     tier1:
+       delay: 5
+       durability: 16
+       item: WOODEN_PICKAXE
 
-  tier1:
-    delay: 5
-    durability: 16
-    item: WOODEN_PICKAXE
+     tier2:
+       delay: 4
+       durability: 64
+       item: STONE_PICKAXE
 
-  tier2:
-    delay: 4
-    durability: 64
-    item: STONE_PICKAXE
+     tier3:
+       delay: 3
+       durability: 256
+       item: GOLDEN_PICKAXE
 
-  tier3:
-    delay: 3
-    durability: 256
-    item: GOLD_PICKAXE
+     tier4:
+       delay: 2
+       durability: 512
+       item: IRON_PICKAXE
 
-  tier4:
-    delay: 2
-    durability: 512
-    item: IRON_PICKAXE
+     tier5:
+       delay: 1
+       durability: 2048
+       item: DIAMOND_PICKAXE
 
-  tier5:
-    delay: 1
-    durability: 2048
-    item: DIAMOND_PICKAXE
+    area:
+      tier1:
+        delay: 15
+        durability: 16
+        item: AIR
+      tier2:
+        delay: 13
+        durability: 16
+        item: WOODEN_PICKAXE
+      tier3:
+        delay: 11
+        durability: 16
+        item: STONE_PICKAXE
+      tier4:
+        delay: 9
+        durability: 16
+        item: GOLDEN_PICKAXE
+      tier5:
+        delay: 6
+        durability: 16
+        item: IRON_PICKAXE
