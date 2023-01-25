@@ -1,14 +1,17 @@
-package rudynakodach.github.io.blockbreakers.StandardBreakers;
+package rudynakodach.github.io.blockbreakers.Breakers.StandardBreakers;
 
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 
 import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import rudynakodach.github.io.blockbreakers.BreakerNamespaceKeys;
+
+import java.util.Objects;
 
 public class Breaker {
 
@@ -22,11 +25,11 @@ public class Breaker {
     public NamespacedKey BLOCK_BREAKER_KEY = BreakerNamespaceKeys.blockBreakerTag;
 
 
-    public Breaker(int _delay, int _tier, int _durability, ItemStack _material) {
-        delay = _delay;
+    public Breaker(int _tier, FileConfiguration config) {
         tier = _tier;
-        durability = _durability;
-        BLOCK_BREAKER_POWER = _material;
+        delay = config.getInt("breakers.block.tier" + tier + ".delay");
+        durability = config.getInt("breakers.block.tier" + tier + ".durability");
+        BLOCK_BREAKER_POWER = new ItemStack(Objects.requireNonNull(Material.getMaterial(Objects.requireNonNull(config.getString("breakers.block.tier" + tier + "item")))), 1);
     }
 
     public ItemStack createBlockBreaker() {

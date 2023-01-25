@@ -1,10 +1,8 @@
-package rudynakodach.github.io.blockbreakers.StandardBreakers;
+package rudynakodach.github.io.blockbreakers.Breakers.StandardBreakers;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.plugin.java.JavaPlugin;
-import rudynakodach.github.io.blockbreakers.StandardBreakers.BreakTask;
-import rudynakodach.github.io.blockbreakers.StandardBreakers.Breaker;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

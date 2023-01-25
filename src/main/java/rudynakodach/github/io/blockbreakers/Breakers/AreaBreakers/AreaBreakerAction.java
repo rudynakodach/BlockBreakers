@@ -1,4 +1,4 @@
-package rudynakodach.github.io.blockbreakers.AreaBreakers;
+package rudynakodach.github.io.blockbreakers.Breakers.AreaBreakers;
 
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -6,7 +6,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AreaBreakerAction {

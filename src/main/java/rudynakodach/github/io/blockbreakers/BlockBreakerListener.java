@@ -11,10 +11,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.java.JavaPlugin;
-import rudynakodach.github.io.blockbreakers.AreaBreakers.AreaBreaker;
-import rudynakodach.github.io.blockbreakers.AreaBreakers.AreaBreakerAction;
-import rudynakodach.github.io.blockbreakers.StandardBreakers.Breaker;
-import rudynakodach.github.io.blockbreakers.StandardBreakers.BreakerAction;
+import rudynakodach.github.io.blockbreakers.Breakers.AreaBreakers.AreaBreaker;
+import rudynakodach.github.io.blockbreakers.Breakers.AreaBreakers.AreaBreakerAction;
+import rudynakodach.github.io.blockbreakers.Breakers.StandardBreakers.Breaker;
+import rudynakodach.github.io.blockbreakers.Breakers.StandardBreakers.BreakerAction;
 
 import java.util.logging.Logger;
 
@@ -35,8 +35,6 @@ public class BlockBreakerListener implements Listener {
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer dataContainer = meta.getPersistentDataContainer();
 
-        BreakerLevels levels = new BreakerLevels(plugin.getConfig());
-
         if(item.getType() == Material.DISPENSER) {
 
             if(dataContainer.has(BreakerNamespaceKeys.blockBreakerTag)) {
@@ -45,7 +43,7 @@ public class BlockBreakerListener implements Listener {
 
                 int tier = meta.getCustomModelData();
 
-                new BreakerAction(plugin,logger, new Breaker(levels.delayMap.get(tier),tier, levels.durabilityMap.get(tier), new ItemStack(levels.breakerItemHashMap.get(tier).getType(), 1)), event.getBlock(), target.getLocation());
+                new BreakerAction(plugin, logger, new Breaker(tier, plugin.getConfig()), event.getBlock(), target.getLocation());
             }
         }
         else if(item.getType() == Material.OBSERVER) {
@@ -54,7 +52,7 @@ public class BlockBreakerListener implements Listener {
                 Block target = event.getBlock().getRelative(BlockFace.DOWN);
                 int tier = meta.getCustomModelData();
 
-                new AreaBreakerAction(plugin, logger, new AreaBreaker(levels.areaBreakerDelayMap.get(tier),tier, levels.areaBreakerDurabilityMap.get(tier), new ItemStack(levels.areaBreakerItemHashMap.get(tier).getType(), 1)),event.getBlock(),target.getLocation(), event.getBlock().getWorld());
+                new AreaBreakerAction(plugin, logger, new AreaBreaker(tier, plugin.getConfig()),event.getBlock(),target.getLocation(), event.getBlock().getWorld());
             }
         }
     }

@@ -1,4 +1,4 @@
-package rudynakodach.github.io.blockbreakers.StandardBreakers;
+package rudynakodach.github.io.blockbreakers.Breakers.StandardBreakers;
 
 import org.bukkit.Location;
 import org.bukkit.Material;

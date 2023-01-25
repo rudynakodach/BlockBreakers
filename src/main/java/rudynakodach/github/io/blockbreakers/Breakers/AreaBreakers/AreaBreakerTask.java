@@ -1,4 +1,4 @@
-package rudynakodach.github.io.blockbreakers.AreaBreakers;
+package rudynakodach.github.io.blockbreakers.Breakers.AreaBreakers;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
