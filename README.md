@@ -20,8 +20,9 @@ PaperMC plugin adding machines to help automation. Completely configurable!
     Permission: `blockbreakers.areabreaker.give`
 ```
 # Configuration
+~~Currently the plugin is limited to 5 tiers.~~ The amount of tiers is fully configurable as well as each parameter of it.
+
 Each type of a breaker is defined seperately in the config.
-Currently the plugin is limited to 5 tiers.
 
 ```
 `breakers` is the root for all the types.
